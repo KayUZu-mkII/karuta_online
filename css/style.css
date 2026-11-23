@@ -32,6 +32,8 @@
 html, body {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -1002,23 +1004,41 @@ select:focus {
 
 @media (max-width: 640px) {
   .topbar {
-    padding: 0.55rem 0.75rem;
+    height: 54px;
+    padding: 0.45rem 0.75rem;
+  }
+  .brand {
+    gap: 0.5rem;
+    min-width: 0;
   }
   .brand-seal {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
+  }
+  .brand-text {
+    min-width: 0;
   }
   .brand-text h1 {
-    font-size: 0.95rem;
-    letter-spacing: 0.03em;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .brand-sub {
     display: none;
   }
+  .topbar-actions {
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
   .icon-btn {
-    padding: 0.4rem 0.55rem;
+    padding: 0.38rem 0.55rem;
+    min-height: 36px;
   }
   .btn-label { display: none; }
+
   .main-container {
     padding: 0.75rem;
   }
@@ -1026,20 +1046,47 @@ select:focus {
   .panel-main,
   .result-card,
   .editor-card {
-    padding: 1.1rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
   }
   .hero-card h2 {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+  .hero-desc {
+    font-size: 0.86rem;
+  }
+  .player-setup-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    padding: 0.75rem;
+  }
+  .player-setup-bar input {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
   }
   input[type="text"],
   select {
     font-size: 16px;
+    width: 100%;
+  }
+  .join-input-row {
+    flex-direction: column;
   }
   .btn {
     min-height: 44px;
   }
   .btn-small {
     min-height: 36px;
+  }
+
+  /* 待機室 */
+  .room-header-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
   }
   .room-code-box {
     width: 100%;
@@ -1048,47 +1095,129 @@ select:focus {
   .settings-grid {
     grid-template-columns: 1fr;
   }
-  .add-card-form {
-    grid-template-columns: 1fr;
+  .waiting-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
   }
+  .waiting-right-actions {
+    flex-direction: column;
+  }
+  .waiting-footer .btn,
+  .waiting-right-actions .btn {
+    width: 100%;
+  }
+
+  /* 対戦画面 */
   .game-hud {
-    padding: 0.55rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.75rem;
     gap: 0.5rem;
+  }
+  .hud-progress {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .hud-scoreboard {
+    justify-content: flex-start;
+  }
+  .hud-controls {
+    justify-content: flex-end;
   }
   #btn-toggle-keyhints {
     display: none;
   }
   .yomi-stage {
-    top: 52px;
+    top: 54px;
     padding: 0.15rem 0 0.35rem;
   }
   .yomi-card {
     padding: 0.65rem 0.85rem;
   }
   .yomi-text {
-    font-size: 1.02rem;
-    min-height: 1.9em;
+    font-size: 1rem;
+    min-height: 1.8em;
+    line-height: 1.45;
   }
   .tori-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
   }
   .tori-card {
-    min-height: 122px;
+    min-height: 120px;
     border-width: 3px;
-    padding: 1.55rem 0.35rem 0.45rem;
+    padding: 1.9rem 0.55rem 0.65rem;
   }
   .tori-head-seal {
-    width: 20px;
-    height: 20px;
-    font-size: 0.7rem;
-    top: 4px;
-    left: 4px;
+    width: 22px;
+    height: 22px;
+    font-size: 0.74rem;
+    top: 5px;
+    left: 5px;
   }
   .tori-body-text {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-height: none;
+    word-break: break-word;
+  }
+
+  /* 結果画面 */
+  .result-table th,
+  .result-table td {
+    white-space: nowrap;
+    padding: 0.55rem 0.65rem;
     font-size: 0.84rem;
-    line-height: 1.3;
-    max-height: 94px;
+  }
+  .result-actions {
+    flex-direction: column;
+  }
+  .result-actions .btn {
+    width: 100%;
+  }
+
+  /* 札管理エディタ */
+  .editor-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .editor-header .btn {
+    align-self: flex-end;
+  }
+  .editor-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .editor-deck-select,
+  .editor-io-actions {
+    width: 100%;
+  }
+  .add-card-form {
+    grid-template-columns: 1fr;
+  }
+  .editor-table thead {
+    display: none;
+  }
+  .editor-table,
+  .editor-table tbody,
+  .editor-table tr,
+  .editor-table td {
+    display: block;
+    width: 100%;
+  }
+  .editor-table tr {
+    border: 1px solid var(--border-wood);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem;
+    margin-bottom: 0.65rem;
+    background: #fff;
+  }
+  .editor-table td {
+    border: none;
+    padding: 0.25rem 0;
   }
 }
 
