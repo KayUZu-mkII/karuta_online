@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-11-20",
+  "decks": [
+    {
+      "id": "bururipa_quotes",
+      "title": "ぶるりぱ名言集",
+      "description": "ぶるりぱの名言を集めたカルタデッキ。「札の管理」または data/cards.json から札を追加できます。",
+      "cards": []
+    }
+  ]
+}
